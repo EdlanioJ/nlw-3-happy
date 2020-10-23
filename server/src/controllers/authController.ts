@@ -23,10 +23,11 @@ export default {
 
     const user = await userRepositoty.findOne({
       where: { email },
+      select: ['id', 'password', 'email'],
     });
 
     if (!user) {
-      return response.status(404).json({ message: 'email invalido' });
+      return response.status(404).json({ message: 'email não encontado' });
     }
 
     const checkPassword = user.checkPassword(password);
