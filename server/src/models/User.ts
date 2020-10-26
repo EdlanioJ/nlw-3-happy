@@ -27,7 +27,7 @@ export default class User {
   name: string;
 
   @OneToMany(() => Orphanage, (orphanage) => orphanage.user, {
-    cascade: ['insert', 'update'],
+    cascade: ['update'],
   })
   @JoinColumn({ name: 'user_id' })
   orphanages: Orphanage[];
@@ -40,7 +40,7 @@ export default class User {
     const jwtSecret = process.env.APP_SECRET as string;
 
     return jwt.sign({ id: this.id }, jwtSecret, {
-      expiresIn: '2m',
+      expiresIn: '10h',
     });
   }
 }

@@ -4,7 +4,7 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   JoinColumn,
-  ManyToMany,
+  ManyToOne,
 } from 'typeorm';
 import Image from './Image';
 import User from './User';
@@ -12,7 +12,7 @@ import User from './User';
 @Entity({ name: 'orphanages' })
 export default class Orphanage {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
 
   @Column()
   name: string;
@@ -41,7 +41,7 @@ export default class Orphanage {
   @JoinColumn({ name: 'orphanage_id' })
   images: Image[];
 
-  @ManyToMany(() => User, (user) => user.orphanages)
+  @ManyToOne(() => User, (user) => user.orphanages)
   @JoinColumn({ name: 'user_id' })
   user: User;
 }
