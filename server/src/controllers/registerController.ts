@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { v4 as uuidv4 } from 'uuid';
 
 import User from '../models/User';
+import userView from '../views/userView';
 
 export default {
   async create(request: Request, response: Response) {
@@ -21,9 +22,9 @@ export default {
     };
 
     const schema = Yup.object().shape({
-      name: Yup.string().required(),
-      email: Yup.string().email().required(),
-      password: Yup.string().min(8).required(),
+      name: Yup.string().required('o nome é obrigatorio'),
+      email: Yup.string().email().required('o email é obrigatorio'),
+      password: Yup.string().min(8).required('a senha é obrigatoria'),
       comfirm_password: Yup.string().oneOf(
         [Yup.ref('password')],
         'Passwords must match'
@@ -50,6 +51,6 @@ export default {
 
     await userRepositoty.save(user);
 
-    return response.status(201).send(user);
+    return response.status(201).send();
   },
 };

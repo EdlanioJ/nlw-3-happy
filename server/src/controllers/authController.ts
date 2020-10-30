@@ -27,7 +27,7 @@ export default {
     });
 
     if (!user) {
-      return response.status(404).json({ message: 'email não encontado' });
+      return response.status(401).json({ message: 'email não encontado' });
     }
 
     const checkPassword = user.checkPassword(password);
@@ -38,6 +38,6 @@ export default {
 
     const token = user.generateToken();
 
-    return response.status(200).json(token);
+    return response.status(200).json({ token });
   },
 };
