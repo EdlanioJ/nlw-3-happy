@@ -14,7 +14,7 @@ async function auth(
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    return res.status(401).json({ message: 'Token not provided' });
+    return res.status(401).json({ message: 'Token não encontado' });
   }
 
   const [, token] = authHeader.split(' ');

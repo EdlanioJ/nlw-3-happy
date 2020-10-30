@@ -1,5 +1,5 @@
-import 'dotenv/config';
-import './database/connection';
+import dotenv from 'dotenv';
+import createConnection from './database/connection';
 
 import express from 'express';
 import cors from 'cors';
@@ -9,6 +9,12 @@ import 'express-async-errors';
 
 import routes from './routes';
 import errorHander from './errors/handler';
+
+dotenv.config({
+  path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
+});
+
+createConnection();
 
 const app = express();
 const uploadsLocal = path.join(__dirname, '..', 'uploads');

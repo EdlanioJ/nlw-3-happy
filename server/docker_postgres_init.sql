@@ -1,0 +1,1 @@
+CREATE DATABASE happy_test ENCODING = 'UTF8';
